@@ -1,0 +1,75 @@
+/* General layout for the Expense Summary component */
+.expense-summary {
+  text-align: center;
+}
+
+/* Pie chart container */
+.chart-container {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto; /* Center the chart */
+}
+
+/* Budget information section */
+.budget-info {
+  margin-top: 20px;
+}
+
+/* Progress bar styling */
+.budget-info progress {
+  width: 100%;
+  margin: 10px 0;
+  height: 20px;
+  border-radius: 5px;
+  border: none;
+  appearance: none;
+}
+
+/* Default Green progress bar */
+.budget-info progress::-webkit-progress-bar {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.budget-info progress::-webkit-progress-value {
+  background-color: green;
+  border-radius: 5px;
+}
+
+/* Orange progress bar when nearing budget limit */
+.budget-progress.progress-orange::-webkit-progress-value {
+  background-color: orange;
+}
+
+/* Red progress bar when budget is exceeded */
+.budget-progress.progress-red::-webkit-progress-value {
+  background-color: red;
+}
+
+/* Warning message styling */
+.warning-message {
+  font-weight: bold;
+}
+
+/* Green warning text */
+.warning-message.warning-green {
+  color: green;
+}
+
+/* Orange warning text */
+.warning-message.warning-orange {
+  color: orange;
+}
+
+/* Red warning text */
+.warning-message.warning-red {
+  color: red;
+}
+
+/* Balance container for centering the balance */
+.balance-container {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
+// import "../App.css";
+import "../styles/ExpenseList.css";
 
 /**
  * ExpenseList Component

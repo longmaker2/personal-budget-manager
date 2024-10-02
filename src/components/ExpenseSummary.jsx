@@ -9,7 +9,7 @@ import {
   LinearScale,
   Title,
 } from "chart.js";
-import "../App.css";
+import "../styles/ExpenseSummary.css"; // Updated path to the component-specific CSS
 
 // Register required Chart.js components
 ChartJS.register(
@@ -95,28 +95,57 @@ const ExpenseSummary = ({
     100 // Ensure the percentage does not exceed 100%
   );
 
+  // Determine the progress bar and warning message class based on the percentage used
+  let progressBarClass = "progress-green"; // Default is green
+  let warningMessageClass = ""; // Default has no warning
+
+  if (expensePercentage >= 100) {
+    progressBarClass = "progress-red"; // If the user reaches 100% or more, make it red
+    warningMessageClass = "warning-red"; // Apply the red warning class
+  } else if (expensePercentage >= 75) {
+    progressBarClass = "progress-orange"; // If the user is over 75% but less than 100%, make it orange
+    warningMessageClass = "warning-orange"; // Apply the orange warning class
+  }
+
   return (
     <div className="expense-summary">
       <h2>Expense Summary</h2>
 
       {/* Pie chart displaying the breakdown of expenses by category */}
-      <div style={{ width: "400px", height: "400px", margin: "0 auto" }}>
+      <div className="chart-container">
         <Pie data={data} options={options} />
       </div>
 
       {/* Display budget-related information */}
-      <div>
+      <div className="budget-info">
         <h3>Budget Limit: ${Number(budgetLimit).toFixed(2)}</h3>
 
         {/* Progress bar showing the percentage of the budget used */}
-        <progress value={totalExpenses} max={budgetLimit}></progress>
+        <progress
+          value={totalExpenses}
+          max={budgetLimit}
+          className={`budget-progress ${progressBarClass}`}
+        ></progress>
+
+        {/* Warning message for nearing or exceeding budget */}
+        {expensePercentage >= 75 && (
+          <p className={`warning-message ${warningMessageClass}`}>
+            {expensePercentage >= 100
+              ? "You have reached your budget limit!"
+              : "Warning: You are nearing your budget limit!"}
+          </p>
+        )}
 
         {/* Display the percentage of the budget spent */}
         <p>{expensePercentage}% of your budget spent</p>
 
-        {/* Total expenses and remaining balance */}
+        {/* Total expenses */}
         <p>Total Expenses: ${formattedTotalExpenses}</p>
-        <p>Remaining Balance: ${formattedBalance}</p>
+      </div>
+
+      {/* Centered remaining balance */}
+      <div className="balance-container">
+        <h2>Remaining Balance: ${formattedBalance}</h2>
       </div>
     </div>
   );

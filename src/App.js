@@ -136,9 +136,6 @@ function App() {
         totalExpenses={totalExpenses}
         balance={balance}
       />
-      <div>
-        <h2>Balance: ${balance.toFixed(2)}</h2>
-      </div>
     </div>
   );
 }

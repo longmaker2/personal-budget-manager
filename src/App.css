@@ -1,0 +1,324 @@
+/* General App Styles */
+.app {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  font-family: "Poppins", sans-serif !important;
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.alert {
+  background-color: #ffe6e6;
+  padding: 15px;
+  color: #cc0000;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  border: 1px solid #ffcccc;
+}
+
+/* Flex container for income and budget fields */
+.budget-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.budget-container > div {
+  flex: 1;
+}
+
+/* Flex container for expense form fields */
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-container > div {
+  flex: 1;
+}
+
+/* Row for Amount and Date */
+.form-row-inline {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row-inline > .form-group {
+  flex: 1;
+}
+
+/* Category select, input, and button styling */
+.category-select {
+  margin-bottom: 10px;
+}
+
+/* New category input and button container */
+.new-category-container {
+  display: flex;
+  gap: 20px;
+}
+
+.new-category-container input[type="text"],
+.new-category-container button {
+  flex: 1;
+  font-family: "Poppins", sans-serif !important;
+}
+
+/* New Category input styling */
+.new-category-container input[type="text"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus effect for new category input field */
+.new-category-container input[type="text"]:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
+/* New Category button styling */
+.new-category-container button {
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.new-category-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Flex container for filter and sort fields in expense list */
+.filter-sort-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.filter-sort-container > div {
+  flex: 1;
+}
+
+/* Expense List Styles */
+.expense-list {
+  margin-bottom: 20px;
+}
+
+.expense-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.expense-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expense-list li span {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.expense-list li button {
+  padding: 8px 20px;
+  margin-left: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.expense-list li button:hover {
+  background-color: #0056b3;
+}
+
+.expense-list li button:last-child {
+  background-color: #dc3545;
+}
+
+.expense-list li button:last-child:hover {
+  background-color: #c82333;
+}
+
+/* Button Container for centering the Add Expense button */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.form-footer button {
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.form-footer button:hover {
+  background-color: #218838;
+}
+
+/* Form Styles */
+form {
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: none;
+  margin-bottom: 25px;
+  background-color: #ffffff;
+}
+
+form div {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #444;
+}
+
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #fefefe;
+  transition: border-color 0.3s ease;
+  font-family: "Poppins", sans-serif !important;
+}
+
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  font-family: "Poppins", sans-serif !important;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 600px) {
+  .app {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .alert {
+    font-size: 14px;
+  }
+
+  form div {
+    margin-bottom: 12px;
+  }
+
+  form label,
+  .expense-list h2,
+  .expense-summary h2 {
+    font-size: 20px;
+  }
+
+  input[type="number"],
+  input[type="date"],
+  select,
+  button {
+    font-size: 14px;
+  }
+
+  .expense-list li {
+    padding: 12px;
+  }
+
+  .expense-list li button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .budget-container,
+  .form-container,
+  .filter-sort-container {
+    flex-direction: column;
+  }
+
+  progress {
+    height: 18px;
+  }
+
+  .category-container {
+    flex-direction: column;
+  }
+
+  .form-row-inline {
+    flex-direction: column;
+  }
+}

@@ -56,3 +56,43 @@ A **Personal Budget Manager** built with React to track expenses, manage budgets
 - **Delete an expense:** Delete the expense.
 - **Budget limit:** Set a budget limit and get notified if your total expenses exceed the limit.
 - **View expense summary:** View a visual summary of your expenses against your budget limit.
+
+## Project Structure
+
+```bash
+├── public
+│   ├── index.html
+│   └── ...
+├── src
+│   ├── components
+│   │   ├── ExpenseForm.jsx
+│   │   ├── ExpenseList.jsx
+│   │   └── ExpenseSummary.jsx
+│   ├── styles
+│   │   ├── ExpenseForm.css
+│   │   ├── ExpenseList.css
+│   │   └── ExpenseSummary.css
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   └── index.css
+├── package.json
+└── README.md
+```
+
+## Dependencies
+
+- [Chart.js](https://www.npmjs.com/package/chart.js)
+- [React](https://www.npmjs.com/package/react)
+- [React Chart.js 2](https://www.npmjs.com/package/react-chartjs-2)
+- [Poppins](https://fonts.google.com/specimen/Poppins)
+
+## Acknowoledgements
+
+- [React Chart.js 2](https://www.npmjs.com/package/react-chartjs-2)
+- [Chart.js](https://www.chartjs.org/)
+- [Poppins](https://fonts.google.com/specimen/Poppins)
+
+## Author
+
+- [Long Maker Long Deng](https://github.com/longmaker2)

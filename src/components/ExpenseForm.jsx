@@ -92,7 +92,7 @@ const ExpenseForm = ({
 
         {/* Form input fields */}
         <div className="form-row">
-          {/* Amount and Date fields, displayed side by side */}
+          {/* Amount and Date fields */}
           <div className="form-row-inline">
             <div className="form-group">
               <label>Amount</label>
@@ -136,7 +136,7 @@ const ExpenseForm = ({
             </div>
           </div>
 
-          {/* New Category input field and button, displayed side by side */}
+          {/* New Category input field and button */}
           <div className="new-category-container">
             <input
               type="text"

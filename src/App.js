@@ -2,34 +2,47 @@ import React, { useState, useEffect } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseSummary from "./components/ExpenseSummary";
-import jsPDF from "jspdf"; // Import jsPDF for PDF export
-import { saveAs } from "file-saver"; // Import saveAs for DOCX export
-import { Document, Packer, Paragraph } from "docx"; // Import docx tools for DOCX export
+import jsPDF from "jspdf";
+import { saveAs } from "file-saver";
+import { Document, Packer, Paragraph } from "docx";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import "./App.css";
 
+/**
+ * App Component
+ *
+ * The main component for the Personal Budget Manager app.
+ * It handles user authentication, displays the logged-in user's name,
+ * and manages all budget and expense-related functionalities like adding, editing,
+ * and deleting expenses, as well as exporting data in CSV, PDF, and DOCX formats.
+ */
 function App() {
+  // State for managing user expenses
   const [expenses, setExpenses] = useState(() => {
     const savedExpenses = localStorage.getItem("expenses");
     return savedExpenses ? JSON.parse(savedExpenses) : [];
   });
 
+  // State for managing overall budget limit
   const [budgetLimit, setBudgetLimit] = useState(() => {
     const savedBudgetLimit = localStorage.getItem("budgetLimit");
     return savedBudgetLimit ? parseFloat(savedBudgetLimit) : 500;
   });
 
+  // State for category-specific budgets
   const [categoryBudgets, setCategoryBudgets] = useState(() => {
     const savedCategoryBudgets = localStorage.getItem("categoryBudgets");
     return savedCategoryBudgets ? JSON.parse(savedCategoryBudgets) : {};
   });
 
+  // State for managing income
   const [income, setIncome] = useState(() => {
     const savedIncome = localStorage.getItem("income");
     return savedIncome ? parseFloat(savedIncome) : 1000;
   });
 
+  // State for managing available categories
   const [categories, setCategories] = useState(() => {
     const savedCategories = localStorage.getItem("categories");
     return savedCategories
@@ -37,10 +50,13 @@ function App() {
       : ["Food", "Transport", "Rent"];
   });
 
+  // States for editing expenses and categories
   const [expenseToEdit, setExpenseToEdit] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
   const [editedCategoryLimit, setEditedCategoryLimit] = useState("");
   const [categoryWarnings, setCategoryWarnings] = useState({});
+
+  // State for user authentication and storing logged-in user info
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const storedAuth = localStorage.getItem("isAuthenticated");
     return storedAuth ? JSON.parse(storedAuth) : false;
@@ -50,6 +66,7 @@ function App() {
   });
   const [isLogin, setIsLogin] = useState(true);
 
+  // Persist changes to expenses, budget, categories, and authentication to localStorage
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [expenses]);
@@ -74,6 +91,12 @@ function App() {
     localStorage.setItem("isAuthenticated", isAuthenticated);
   }, [isAuthenticated]);
 
+  /**
+   * handleLogin - Authenticates the user based on username/email and password.
+   *
+   * @param {string} identifier - The username or email entered by the user.
+   * @param {string} password - The password entered by the user.
+   */
   const handleLogin = (identifier, password) => {
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
     const userExists = storedUsers.find(
@@ -90,6 +113,13 @@ function App() {
     }
   };
 
+  /**
+   * handleRegister - Registers a new user with username, email, and password.
+   *
+   * @param {string} username - The chosen username for registration.
+   * @param {string} email - The user's email address.
+   * @param {string} password - The chosen password for the account.
+   */
   const handleRegister = (username, email, password) => {
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
     const userExists = storedUsers.find(
@@ -107,12 +137,22 @@ function App() {
     }
   };
 
+  /**
+   * handleLogout - Logs the user out and clears authentication data.
+   */
   const handleLogout = () => {
     setIsAuthenticated(false);
     setLoggedInUser("");
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("loggedInUser");
   };
+
+  /**
+   * Other expense management functionalities are handled here
+   * - Editing, deleting, and updating expenses.
+   * - Budgeting logic for total and category-specific budgets.
+   * - Export functionalities for CSV, PDF, and DOCX.
+   */
 
   const totalExpenses = expenses.reduce(
     (acc, expense) => acc + parseFloat(expense.amount || 0),
@@ -266,6 +306,7 @@ function App() {
     saveAs(blob, "expenses.docx");
   };
 
+  // Authentication handling - shows login/register view if not authenticated
   if (!isAuthenticated) {
     return isLogin ? (
       <Login onLogin={handleLogin} toggleView={() => setIsLogin(false)} />
@@ -315,6 +356,7 @@ function App() {
         </div>
       </div>
 
+      {/* Display category budgets and progress */}
       {categories.map((category) => {
         const categorySpent = categoryTotals[category];
         const categoryBudget = categoryBudgets[category] || 100;
@@ -392,6 +434,7 @@ function App() {
         );
       })}
 
+      {/* Components for expense form, expense list, and summary */}
       <ExpenseForm
         setExpenses={setExpenses}
         categories={categories}

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/personal-budget-manager/static/css/main.98644245.css",
-    "main.js": "/personal-budget-manager/static/js/main.1a9bf97d.js",
+    "main.js": "/personal-budget-manager/static/js/main.ba914649.js",
     "static/js/239.18265b87.chunk.js": "/personal-budget-manager/static/js/239.18265b87.chunk.js",
     "static/js/213.17ce463f.chunk.js": "/personal-budget-manager/static/js/213.17ce463f.chunk.js",
     "static/js/732.f4d94429.chunk.js": "/personal-budget-manager/static/js/732.f4d94429.chunk.js",
     "static/js/453.e4f83acf.chunk.js": "/personal-budget-manager/static/js/453.e4f83acf.chunk.js",
     "index.html": "/personal-budget-manager/index.html",
     "main.98644245.css.map": "/personal-budget-manager/static/css/main.98644245.css.map",
-    "main.1a9bf97d.js.map": "/personal-budget-manager/static/js/main.1a9bf97d.js.map",
+    "main.ba914649.js.map": "/personal-budget-manager/static/js/main.ba914649.js.map",
     "239.18265b87.chunk.js.map": "/personal-budget-manager/static/js/239.18265b87.chunk.js.map",
     "213.17ce463f.chunk.js.map": "/personal-budget-manager/static/js/213.17ce463f.chunk.js.map",
     "732.f4d94429.chunk.js.map": "/personal-budget-manager/static/js/732.f4d94429.chunk.js.map",
@@ -16,6 +16,6 @@
   },
   "entrypoints": [
     "static/css/main.98644245.css",
-    "static/js/main.1a9bf97d.js"
+    "static/js/main.ba914649.js"
   ]
 }

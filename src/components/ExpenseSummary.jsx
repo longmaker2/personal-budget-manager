@@ -9,9 +9,8 @@ import {
   LinearScale,
   Title,
 } from "chart.js";
-import "../styles/ExpenseSummary.css"; // Updated path to the component-specific CSS
+import "../styles/ExpenseSummary.css";
 
-// Register required Chart.js components
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -24,13 +23,14 @@ ChartJS.register(
 /**
  * ExpenseSummary Component
  *
- * This component provides a visual summary of the user's expenses using a pie chart.
- * It also displays the total expenses, remaining balance, and the percentage of the budget used.
+ * This component provides a visual and statistical summary of the user's expenses.
+ * It includes a pie chart showing the distribution of expenses by category, and
+ * details such as total expenses, remaining balance, and budget usage.
  *
- * @param {Array} expenses - List of expense objects.
- * @param {number} budgetLimit - The budget limit set by the user.
- * @param {number} totalExpenses - The total sum of all expenses.
- * @param {number} balance - The remaining balance after expenses are deducted from income.
+ * @param {Array} expenses - Array of expense objects.
+ * @param {number} budgetLimit - The total budget limit.
+ * @param {number} totalExpenses - The total amount of expenses.
+ * @param {number} balance - The remaining balance after expenses.
  */
 const ExpenseSummary = ({
   expenses,
@@ -38,26 +38,21 @@ const ExpenseSummary = ({
   totalExpenses = 0,
   balance = 0,
 }) => {
-  // Format the total expenses and balance to two decimal places for display
   const formattedTotalExpenses = Number(totalExpenses).toFixed(2);
   const formattedBalance = Number(balance).toFixed(2);
 
-  // Extract unique categories from the list of expenses for labeling the pie chart
   const categories = [...new Set(expenses.map((expense) => expense.category))];
 
-  // Chart data: calculates the total expense for each category
   const data = {
-    labels: categories, // Pie chart labels
+    labels: categories,
     datasets: [
       {
         label: "Expenses by Category",
-        // Sum expenses for each category
         data: categories.map((category) =>
           expenses
             .filter((expense) => expense.category === category)
             .reduce((acc, curr) => acc + curr.amount, 0)
         ),
-        // Assign different colors for each category
         backgroundColor: [
           "#dc3545",
           "#0056b3",
@@ -78,56 +73,49 @@ const ExpenseSummary = ({
     ],
   };
 
-  // Chart options: ensures the chart is responsive and well-positioned
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Allows for a custom width/height
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "top", // Position the legend at the top of the chart
+        position: "top",
       },
     },
   };
 
-  // Calculate the percentage of the budget used for expenses
   const expensePercentage = Math.min(
     ((totalExpenses / budgetLimit) * 100).toFixed(2),
-    100 // Ensure the percentage does not exceed 100%
+    100
   );
 
-  // Determine the progress bar and warning message class based on the percentage used
-  let progressBarClass = "progress-green"; // Default is green
-  let warningMessageClass = ""; // Default has no warning
+  let progressBarClass = "progress-green";
+  let warningMessageClass = "";
 
   if (expensePercentage >= 100) {
-    progressBarClass = "progress-red"; // If the user reaches 100% or more, make it red
-    warningMessageClass = "warning-red"; // Apply the red warning class
+    progressBarClass = "progress-red";
+    warningMessageClass = "warning-red";
   } else if (expensePercentage >= 75) {
-    progressBarClass = "progress-orange"; // If the user is over 75% but less than 100%, make it orange
-    warningMessageClass = "warning-orange"; // Apply the orange warning class
+    progressBarClass = "progress-orange";
+    warningMessageClass = "warning-orange";
   }
 
   return (
     <div className="expense-summary">
       <h2>Expense Summary</h2>
 
-      {/* Pie chart displaying the breakdown of expenses by category */}
       <div className="chart-container">
         <Pie data={data} options={options} />
       </div>
 
-      {/* Display budget-related information */}
       <div className="budget-info">
         <h3>Budget Limit: ${Number(budgetLimit).toFixed(2)}</h3>
 
-        {/* Progress bar showing the percentage of the budget used */}
         <progress
           value={totalExpenses}
           max={budgetLimit}
           className={`budget-progress ${progressBarClass}`}
         ></progress>
 
-        {/* Warning message for nearing or exceeding budget */}
         {expensePercentage >= 75 && (
           <p className={`warning-message ${warningMessageClass}`}>
             {expensePercentage >= 100
@@ -136,14 +124,10 @@ const ExpenseSummary = ({
           </p>
         )}
 
-        {/* Display the percentage of the budget spent */}
         <p>{expensePercentage}% of your budget spent</p>
-
-        {/* Total expenses */}
         <p>Total Expenses: ${formattedTotalExpenses}</p>
       </div>
 
-      {/* Centered remaining balance */}
       <div className="balance-container">
         <h2>Remaining Balance: ${formattedBalance}</h2>
       </div>

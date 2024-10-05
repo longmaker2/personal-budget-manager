@@ -41,6 +41,60 @@ h1 {
   flex: 1;
 }
 
+/* Flex container for category header and edit button */
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.category-header h4 {
+  margin: 0;
+  flex: 1; /* Align the category name to the left */
+}
+
+.category-header button {
+  margin-left: 20px;
+  padding: 2px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.category-header button:hover {
+  background-color: #0056b3;
+}
+
+/* Red delete button for categories */
+.category-header .delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.category-header .delete-button:hover {
+  background-color: #c82333;
+}
+
+.category-header input[type="number"] {
+  width: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
 /* Flex container for expense form fields */
 .form-container {
   display: flex;
@@ -86,7 +140,7 @@ h1 {
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 16px;
   box-sizing: border-box;
   transition: border-color 0.3s ease;
 }
@@ -99,18 +153,30 @@ h1 {
 
 /* New Category button styling */
 .new-category-container button {
-  padding: 12px;
+  padding: 8px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   transition: background-color 0.3s ease;
 }
 
 .new-category-container button:hover {
   background-color: #0056b3;
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.category-warning {
+  color: #dc3545;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /* Flex container for filter and sort fields in expense list */
@@ -256,12 +322,76 @@ button {
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   font-family: "Poppins", sans-serif !important;
 }
 
 button:hover {
   background-color: #218838;
+}
+
+/* Category Progress Bars */
+.budget-progress {
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.progress-green::-webkit-progress-value {
+  background-color: green;
+}
+
+.progress-orange::-webkit-progress-value {
+  background-color: orange;
+}
+
+.progress-red::-webkit-progress-value {
+  background-color: red;
+}
+
+/* Warning Messages */
+.warning-green {
+  color: green;
+}
+
+.warning-orange {
+  color: orange;
+}
+
+.warning-red {
+  color: red;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info span {
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.logout-button {
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
 }
 
 /* Media Queries for Mobile Responsiveness */

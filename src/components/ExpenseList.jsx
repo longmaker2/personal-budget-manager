@@ -1,80 +1,51 @@
 import React, { useState } from "react";
-// import "../App.css";
 import "../styles/ExpenseList.css";
 
-/**
- * ExpenseList Component
- *
- * This component displays a list of expenses and provides options to filter, sort, edit, and delete expenses.
- * It allows users to edit the amount of an expense directly in the list and save the changes.
- *
- * @param {Array} expenses - The list of expense objects to be displayed.
- * @param {Function} onEditExpense - Function to handle editing an expense.
- * @param {Function} onDeleteExpense - Function to handle deleting an expense.
- */
-const ExpenseList = ({ expenses, onEditExpense, onDeleteExpense }) => {
-  // State to manage filtering, sorting, and inline editing
-  const [filterCategory, setFilterCategory] = useState("All"); // Stores the selected category filter
-  const [sortOrder, setSortOrder] = useState("desc"); // Stores the sort order (ascending/descending)
-  const [editingIndex, setEditingIndex] = useState(null); // Index of the expense currently being edited
-  const [editedAmount, setEditedAmount] = useState(""); // Stores the edited amount for the inline editing
+const ExpenseList = ({
+  expenses,
+  onEditExpense,
+  onDeleteExpense,
+  exportToCSV,
+  exportToPDF,
+  exportToDOCX,
+}) => {
+  const [filterCategory, setFilterCategory] = useState("All");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedAmount, setEditedAmount] = useState("");
 
-  /**
-   * Sorts expenses based on the selected sort order (ascending or descending).
-   */
   const sortedExpenses = [...expenses].sort((a, b) => {
     return sortOrder === "asc" ? a.amount - b.amount : b.amount - a.amount;
   });
 
-  /**
-   * Filters expenses based on the selected category.
-   * If "All" is selected, all expenses are shown; otherwise, only expenses from the selected category are displayed.
-   */
   const filteredExpenses =
     filterCategory === "All"
       ? sortedExpenses
       : sortedExpenses.filter((expense) => expense.category === filterCategory);
 
-  /**
-   * handleEditClick Function
-   *
-   * When the "Edit" button is clicked, this function sets the current index for inline editing and pre-populates
-   * the amount field with the current value.
-   *
-   * @param {Number} index - The index of the expense to be edited.
-   */
-  const handleEditClick = (index) => {
-    setEditingIndex(index); // Set the index of the expense being edited
-    setEditedAmount(expenses[index].amount); // Pre-populate the amount input with the existing value
+  const handleEditClick = (originalIndex) => {
+    setEditingIndex(originalIndex);
+    setEditedAmount(expenses[originalIndex].amount);
   };
 
-  /**
-   * handleSaveClick Function
-   *
-   * When the "Save" button is clicked, this function updates the expense with the new amount and clears the editing state.
-   *
-   * @param {Number} index - The index of the expense to be updated.
-   */
-  const handleSaveClick = (index) => {
+  const handleSaveClick = (originalIndex) => {
     const updatedExpense = {
-      ...expenses[index], // Copy the existing expense data
-      amount: parseFloat(editedAmount), // Update the amount with the new value
+      ...expenses[originalIndex],
+      amount: parseFloat(editedAmount),
     };
-    onEditExpense(index, updatedExpense); // Call the parent function to save the updated expense
-    setEditingIndex(null); // Exit the editing mode
+    onEditExpense(originalIndex, updatedExpense);
+    setEditingIndex(null);
   };
 
   return (
     <div className="expense-list">
       <h2>Expenses</h2>
 
-      {/* Filter and Sort Options */}
       <div className="filter-sort-container">
         <div>
           <label>Filter by Category:</label>
           <select onChange={(e) => setFilterCategory(e.target.value)}>
             <option value="All">All</option>
-            {/* Dynamically generate filter options based on unique categories from the expenses list */}
             {Array.from(
               new Set(expenses.map((expense) => expense.category))
             ).map((category, index) => (
@@ -94,34 +65,46 @@ const ExpenseList = ({ expenses, onEditExpense, onDeleteExpense }) => {
         </div>
       </div>
 
-      {/* Expense List */}
       <ul>
-        {filteredExpenses.map((expense, index) => (
-          <li key={index}>
-            <span>
-              {expense.date} - {expense.category}: $
-              {/* If the current item is being edited, show the input field, otherwise show the amount */}
-              {editingIndex === index ? (
-                <input
-                  type="number"
-                  value={editedAmount}
-                  onChange={(e) => setEditedAmount(e.target.value)}
-                />
+        {filteredExpenses.map((expense, displayIndex) => {
+          const originalIndex = expenses.findIndex((exp) => exp === expense);
+
+          return (
+            <li key={originalIndex}>
+              <span>
+                {expense.date} - {expense.category}: $
+                {editingIndex === originalIndex ? (
+                  <input
+                    type="number"
+                    value={editedAmount}
+                    onChange={(e) => setEditedAmount(e.target.value)}
+                  />
+                ) : (
+                  expense.amount.toFixed(2)
+                )}
+              </span>
+              {editingIndex === originalIndex ? (
+                <button onClick={() => handleSaveClick(originalIndex)}>
+                  Save
+                </button>
               ) : (
-                expense.amount.toFixed(2) // Format the amount to two decimal places
+                <button onClick={() => handleEditClick(originalIndex)}>
+                  Edit
+                </button>
               )}
-            </span>
-            {/* If the current item is being edited, show the "Save" button, otherwise show the "Edit" button */}
-            {editingIndex === index ? (
-              <button onClick={() => handleSaveClick(index)}>Save</button>
-            ) : (
-              <button onClick={() => handleEditClick(index)}>Edit</button>
-            )}
-            {/* Delete button */}
-            <button onClick={() => onDeleteExpense(index)}>Delete</button>
-          </li>
-        ))}
+              <button onClick={() => onDeleteExpense(originalIndex)}>
+                Delete
+              </button>
+            </li>
+          );
+        })}
       </ul>
+
+      <div className="export-buttons">
+        <button onClick={exportToCSV}>Export to CSV</button>
+        <button onClick={exportToPDF}>Export to PDF</button>
+        <button onClick={exportToDOCX}>Export to DOCX</button>
+      </div>
     </div>
   );
 };
